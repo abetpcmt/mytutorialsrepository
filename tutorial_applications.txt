@@ -60,6 +60,53 @@ Table of Contents
 # git add *.hml
 # git add *.js
 
-7. 
+7. To commit all the changes just run
+# git commit 
  
+
+[ GIT UPLOADING TO GITHUB ] 
+
+8. Login to github and create a free account 
+https://github.com
+
+9. Create new repository for your project and put 
+	Repository name
+	Description
+	Public
+
+10. Click Create repository then if your first time  follow the instruction on the page
+
+      …or create a new repository on the command line
+	echo "# mytutorialsrepository" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin git@github.com:abetpcmt/mytutorialsrepository.git
+	git push -u origin master
+
+11. Take note of the last 2 lines. run this to  know where it will upload to github
+	git remote add origin git@github.com:abetpcmt/mytutorialsrepository.git
+	git push -u origin master
+
+12. Execute this to configure your local git to see the remote github
+	# git remote add origin git@github.com:abetpcmt/mytutorialsrepository.git
+	# git remote
+	# origin
+
+13. Execute this to upload the local master branch to github
+	# git push -u origin master
+
+
+
+
+Creating SSH key to connect to GITHUB
+
+
  
+
+
+
+
+
+
+
