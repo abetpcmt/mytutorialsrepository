@@ -1,0 +1,31 @@
+# problem_solution.txt
+
+20200801	- created
+
+[ /VAR FULL   -  /var/spool/abrt  ]
+
+
+
+
+### >>>
+
+[ /VAR FULL   -  /var/spool/abrt  ]
+
+PROB:
+
+All crash report and back trace from kernel driver is written on subdirectories of /var/spool/abrt directory.
+
+
+SOLN:
+
+To permanently stop this back trace gathering, we need to stop below two processes.
+
+# service abrtd stop
+
+# service abrt-oops stop
+
+And we can remove all those directories and files with following rm command:
+
+# abrt-cli rm /var/spool/abrt/*
+
+### >>>
