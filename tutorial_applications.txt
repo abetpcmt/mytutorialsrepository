@@ -66,9 +66,36 @@ Table of Contents
 
 [ GIT UPLOADING TO GITHUB ] 
 
+
 8. Login to github and create a free account 
 https://github.com
 
+	[ GENERATING NEW SSH KEY for GitHub account ]
+	https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+	1. Open terminal 
+	2. Paste the following, substituting in your GitHub email address.
+	   $  ssh-keygen -t rsa -b 4096 -C "your_email@example.com" 
+	   > Generating public/private rsa key pair.
+	3. Press enter when prompted with this.
+	   > Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+        4. Type a secure passphrase
+	   > Enter passphrase (empty for no passphrase): [Type a passphrase]
+	   > Enter same passphrase again: [Type passphrase again]
+
+	Adding your SSH key to the ssh-agent
+	5. Start ssh-agent in the backgound
+	   $ eval "$(ssh-agent -s)"
+	   > Agent pid 59566
+
+	6. Add your SSH private key to ssh-agent
+	   $ ssh-add ~/.ssh/id_rsa
+
+	7. Add your SSH key to your GitHub account
+	   https://docs.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account
+ 	   !!! copy your SSH  public key !!!
+	   # cat ~/.ssh/id_rsa.pub	### copy all NO SPACES and paste to your GitHub.
+	
 9. Create new repository for your project and put 
 	Repository name
 	Description
@@ -96,10 +123,10 @@ https://github.com
 13. Execute this to upload the local master branch to github
 	# git push -u origin master
 
+14. You will see the newly upload files on your GitHub account.
+	abetpcmt/mytutorialsrepository
 
 
-
-Creating SSH key to connect to GITHUB
 
 
  
