@@ -1,0 +1,65 @@
+# tutorial_applications.txt
+
+20200801	- created
+
+
+
+Table of Contents
+
+[ GIT BASIC TUTORIALS ]
+
+
+
+
+
+
+### >>>
+
+[ GIT BASIC TUTORIALS ]
+
+1. Install git on your systems.
+# yum install git
+
+2. Create a dir/folder for your files you want to track
+# mkdir ~/project1 ; cd ~/project1
+
+3. Create few files that you want to track
+# touch index.html
+# touch apps.js
+# README.md
+
+4. Initialized your folder with git for track
+			!!! This will create master brach for your project
+# git init		### this will create .git folder on your current dir.
+# git config --global user.name 'abetpcmt'
+# git config --global user.email 'abetpcmt@gmail.com
+
+5. Check your file status 
+# git status
+		!!! all file will be on STAGING AREA initially !!!
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   README.md
+#	new file:   tutorial_applications.txt
+#	new file:   tutorial_systems.txt
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   tutorial_applications.txt
+#
+
+6. to add the modified file
+# git add .     or filename.txt
+# git add *.hml
+# git add *.js
+
+7. 
+ 
+ 

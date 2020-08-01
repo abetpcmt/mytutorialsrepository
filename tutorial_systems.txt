@@ -1,0 +1,51 @@
+# tutorial_systems.txt
+
+
+Table of Contents
+
+[ CREATE BOOTABLE USB FROM ISO ]
+
+
+
+
+
+
+### >>>
+
+[ CREATE BOOTABLE USB FROM ISO ]
+	Update: 08012020
+
+1. Download ISO of your choice to /tmp and mount it on /media
+  # wget -c -P /tmp/iso \
+  http://mirrors.mit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso
+  # mount -o loop /tmp/iso/CentOS-7-x86_64-Minimal-1804.iso /media/iso
+  
+  //// check it then umount it
+  # ls -l /media/iso
+
+2. Plug USB stick and identify its name
+  # lsblk 
+  NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+  sda           8:0    0 465.8G  0 disk
+  └─sda1        8:1    0 465.8G  0 part /data
+  sdx           8:16   1   7.5G  0 disk 
+  └─sdx1        8:17   1   7.5G  0 part /run/media/linuxize/Kingston
+  
+3. Unmount the USB that is autoload with you plug it in.
+  # umount /dev/sdx1      or  # umount /run/media/.....
+  
+4. Flash the iso image to USB drive
+  # dd bs=4M if=/tmp/iso/CentOS-7-x86_64-Minimal-1804.iso of=/dev/sdx \
+    status=progress oflag=sync
+    
+  458+1 records in
+  458+1 records out 
+  1921843200 bytes (1.9 GB, 1.8 GiB) copied, 147.006 s, 13 MB/s
+
+5. That’s all, at this point you have a bootable CentOS on your USB stick.
+
+
+### >>>
+
+
+
