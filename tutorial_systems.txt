@@ -1,10 +1,48 @@
 # tutorial_systems.txt
+# hardware: thinkpad x250
+# platform: centos 7
+
 
 
 Table of Contents
 
+[ NMCLI WIFI CONNECT ]
 [ CREATE BOOTABLE USB FROM ISO ]
 
+
+### >>>
+
+
+
+
+
+### >>>
+
+[ NMCLI WIFI CONNECT ]
+:: 20200803 
+
+1. show available devices eg. etherne, wifi
+# nmcli d
+# nmcli device 
+
+2. show wifi device statut enabled/disabled 
+# nmcli r 
+# nmcli radio
+
+3. turn wifi on or off
+# nmcli r wifi on/off
+# nmcli r
+
+4. find available wifi and signal strength
+# nmcli d wifi
+# nmcli device wifi
+
+5. connect to wifi
+# nmcli d wifi connect <wifiname> [password <password>] 
+# nmcli d
+
+6. check interne connection
+# ping 8.8.8.8  or    # ping google.com
 
 
 
@@ -13,7 +51,7 @@ Table of Contents
 ### >>>
 
 [ CREATE BOOTABLE USB FROM ISO ]
-	Update: 08012020
+:: 08012020
 
 1. Download ISO of your choice to /tmp and mount it on /media
   # wget -c -P /tmp/iso \
