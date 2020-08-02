@@ -1,11 +1,35 @@
 # problem_solution.txt
 
-20200801	- created
+:: 20200801	- created
 
+
+
+
+SYSTEMS :::
+
+
+
+
+
+DISK :::
 [ /VAR FULL   -  /var/spool/abrt  ]
 
 
 
+
+
+### >>
+
+
+
+
+
+
+
+
+
+
+::::: DISK :::::
 
 ### >>>
 
@@ -21,11 +45,50 @@ SOLN:
 To permanently stop this back trace gathering, we need to stop below two processes.
 
 # service abrtd stop
-
 # service abrt-oops stop
 
 And we can remove all those directories and files with following rm command:
 
 # abrt-cli rm /var/spool/abrt/*
+
+# service abrtd start
+# service abrt-oops start
+
+
+OR  
+
+We want to simplify the deletion process as the following -- 
+it will delete the directories that are older than 10 days from /var/spool/abrt/
+
+	# find /var/spool/abrt/  -type d -ctime +10  -exec rm -rf {} \;
+
+
+OR 
+
+Cleanup script (run it of put it on crontab -e)
+
+$ cat purgeabrt.sh
+
+#!/bin/bash
+set -e			### will terminate the execution of the script if a command exits with a non-zero status.  
+function cleanup()
+{
+    systemctl start abrtd
+    systemctl start abrt-oops
+}
+
+trap cleanup EXIT      ### will catch signals that may be thrown to the script and executes the cleanup code.
+
+systemctl stop abrtd
+systemctl stop abrt-oops
+find /var/spool/abrt/ -type d -ctime +10 -exec abrt-cli rm {} \;
+cleanup
+
+
+sudo crontab -e
+*/5 * * * * bash ../purgeabrt.sh
+
+
+
 
 ### >>>
