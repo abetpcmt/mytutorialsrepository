@@ -6,11 +6,140 @@
 
 Table of Contents
 
+[ grub > - console ]
+[ grub rescue> - console ]
+[ INITRD IMG REBUILD ]
 [ NMCLI WIFI CONNECT ]
 [ CREATE BOOTABLE USB FROM ISO ]
 
 
 ### >>>
+
+
+[ grub> - console ]
+
+Something is wrong with your grub settings here
+Now how to boot on your system to fix your grub problem
+
+1. check existing drive & partition
+grub> ls
+(hdX) (hdX,msdosY)
+: maybe alot more
+
+2.check what partion has our files on so that we can boot to it.
+grub> ls (hdX,msdosY)/
+lost+found/ var/ dev/ run/ etc/ tmp/ sys/ proc/ usr/ bin root/ home/
+mnt/ opt/
+
+3. set found drive to root
+grun> set root=(hdX,msdosY)
+
+4. point to your kernel to boot from
+grub> linux /boot/vmlinuz root=/dev/sdXY    ## make sure put correct /dev/sdXY
+
+5. point to your init ram file system to use
+grub> initrd /boot/initramfs.img
+
+6. now reboot your system to check
+grub> boot
+
+When system is up now is the time to find and fix grub problem
+
+
+
+
+
+
+
+### >>>
+
+
+[ grub rescue> - console ]
+
+grub rescue> when you see this grub-rescue console 
+- you have missing grub files
+- ony way to fix it is via live media disk/usb 
+
+Fix:
+1. boot on live media disk/usb
+
+2. mount drive having problem
+# mount /dev/sdaX /mnt
+
+3. when /mnt mounted make it our root directory 
+# chroot /mnt
+# ls -l
+
+REBUILD GRUB
+4. create /boot/grub folder  if missing
+# mkdir /boot/grub
+
+5. run grub-mkconfig to create grub.cfg
+# grub-mkconfig -o /boot/grub/grub.cfg
+
+4. goto /boot/grub folder and check the grub.cfg exist
+# cd /boot/grub
+
+5. run grub-install to create missing files in /boot/grub
+# grun-install /dev/sdX
+
+6. verify if file exist
+# ls -l
+
+7. reboot the system and check.
+# reboot
+
+
+
+
+
+
+### >>>
+
+[ INITRD IMG REBUILD ]
+https://access.redhat.com/solutions/24029
+for RHEL5 & 6
+
+# cp -v /boot/initrd.img /tmp/initdir && cd /tmp/initdir
+
+xz/LZMA format - Extract/Uncompress
+
+# file initrd.img 
+initrd.img: LZMA compressed data, streamed
+
+# xz -dc < /boot/initrd-$(uname -r).img | cpio -idmv
+
+xz/LZMA format - Repack/Recompress
+
+# find . 2>/dev/null | cpio -o -c -R root:root | xz -9 --format=lzma > /boot/new.img
+
+OR
+
+gzip format - Extract/Uncompress
+
+# file initrd.gz 
+initrd.gz: gzip compressed data, was "initrd", from Unix, last modified: Thu Jul 30 05:36:08 2020, max compression
+# zcat /boot/initrd-$(uname -r).img | cpio -idmv
+
+gzip format - Repack/Recompress
+
+# find . | cpio -o -c -R root:root | gzip -9 > /boot/new.img
+
+
+
+
+
+https://www.lisenet.com/2014/rebuild-initrd-image-linux/
+
+1. Copy and Extract initrd image
+# IMG=initrd.img-3.4.89
+# cp -v /boot/"$IMG" /tmp/"$IMG".gz && gunzip /tmp/"$IMG".gz
+# mkdir /tmp/"$IMG"_dir && cd /tmp/"$IMG"_dir && cpio -iv < ../"$IMG"
+
+2. Create a new initrd image
+# find ./ | cpio -H newc -o > /tmp/"$IMG".cpio
+# gzip /tmp/"$IMG".cpio && mv -v /tmp/"$IMG".cpio.gz /boot/"$IMG"-new 
+# cd ~ && rm -Rf /tmp/"$IMG"*
 
 
 
