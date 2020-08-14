@@ -1,0 +1,27 @@
+tutorial_adhoc.txt
+
+
+[ SUDOER | UBUNTU ]
+
+
+### >>>
+[ SUDOER | UBUNTU ]
+@ 20200814
+
+1. Boot up to GRUB and select Advanced / recovery mode
+
+2. Select "root" on the menu press Enter
+
+3. Make / writable
+# mount -o rw,remount /
+
+4. Add user to sudo group
+# usermod -aG sudo <username>
+
+5. Exit back to menu
+# exit
+
+6. On Recovery Menu select "resume" and press OK
+
+7. Go normal boot and check your sudo account
+
