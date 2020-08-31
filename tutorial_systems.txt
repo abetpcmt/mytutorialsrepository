@@ -6,6 +6,7 @@
 
 Table of Contents
 
+[ Network Troubleshooting ]
 [ grub > - console ]
 [ grub rescue> - console ]
 [ INITRD IMG REBUILD ]
@@ -15,6 +16,101 @@ Table of Contents
 
 ### >>>
 
+[ Network Troubleshooting ]
+https://www.redhat.com/sysadmin/beginners-guide-network-troubleshooting-linux
+
+	N E T W O R K    L A Y E R
+
+	ISO Model 			TCP/IP
+____________________________________________
+
+Application Layer		Applicaiton Layer
+Presentation Layer
+Session Layer
+____________________________________________
+
+Transport Layer			Transport Layer
+____________________________________________
+
+Network Layer			Internet Layer
+____________________________________________
+
+Data Link Layer			Network Access Layer
+Physical Layer			
+_____________________________________________
+
+
+Layer 1: Physical Layer
+
+Check physical layer if up
+# ip link show
+# ip -br link show
+# ip -s link show <eth0>	## more statistics
+# ethtool <eth0> 			## check negotaited correct speed
+
+if down set it up
+# ip link set <eth0> up
+
+
+
+Layer 2: Data Link
+
+Check arp entries
+# ip neigh show
+# arp -a 			# obsolete
+
+
+
+Layer 3: Network / internet layer
+
+check ip address
+# ip -br addr show
+
+check connectivity
+# ping 8.8.8.8
+
+where the packet traversed on its way to destination
+# traceroute 8.8.8.8
+
+print routing table
+# ip route show
+
+check route with more than 1 network
+# ip route show 10.0.0.0/8
+
+check for DNS
+# nslookup google.com
+
+# dig google.com ANY
+# dig -x 8.8.8.8
+
+# host 8.8.8.8
+
+
+Layer 4: Transport layer
+
+check port listening
+# ss -tunlp4
+# ss -ta 
+# ss -t4 stated established
+
+
+check tcp connectivity
+# telnet <url.com> <port#>
+
+# tcpdump -i <nic-device>
+
+check udp connectivity
+# nc <ip-addr> -u <port>
+
+# nmap -v <url.com>
+
+
+
+
+
+
+### >>>
 
 [ grub> - console ]
 
