@@ -1,7 +1,69 @@
 tutorial_adhoc.txt
 
-
+[ DOKUWIKI INSTALL | UBUNTU ]
 [ SUDOER | UBUNTU ]
+
+
+
+### >>>
+[ DOKUWIKI INSTALL | UBUNTU ]
+
+1. Update/Upgrade Ubuntu
+# sudo apt-get update && sudo apt-get upgrade
+
+2. Install Apache PHP
+# sudo apt-get install apache2 libapache2-mod-php php-xml
+
+3. Enable apache rewrit module
+# sudo a2enmod rewrite
+Enabling module rewrite.
+To activate the new configuration, you need to run:
+  systemctl restart apache2
+
+4. Download and uncompress dokuwiki 
+cd /var/www
+sudo wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+sudo tar xvf dokuwiki-stable.tgz
+sudo mv dokuwiki-*/ dokuwiki
+
+
+5. Change permission
+# sudo chown -R www-data:www-data /var/www/dokuwiki
+
+6. Change document root in Apache to point to /var/www/dokuwiki
+# sudo nano /etc/apache2/sites-enabled/dokuwiki.conf
+
+Alias /dokuwiki /var/www/dokuwiki
+<Directory /var/www/dokuwiki>
+        Options +FollowSymLinks
+        AllowOverride All
+        DirectoryIndex index.php
+        Order allow,deny
+        Allow from all
+</Directory>
+AliasMatch ^/dokuwiki/sites/[^/]+$      /var/www/dokuwiki/
+AliasMatch ^/dokuwiki/sites/[^/]+/(.*)$ /var/www/dokuwiki/$1
+
+7. Enable the new project by placing it into /etc/apache2/sites-enabled with
+# sudo a2ensite dokuwiki
+
+8. Restart apache 
+# systemctl restart apache2
+
+9. Install DokuWiki
+On browser goto http://IP-address-of-your-server/install.php to initially configure your DokuWiki
+
+10. Delete the install.php file after finished installing.
+# sudo rm /var/www/dokuwiki/install.php
+# sudo rm /var/www/dokuwiki-*
+
+
+
+
+
+
+
+
 
 
 ### >>>
